@@ -6,6 +6,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 ReactDOM.render(
-    <App phrase="ES2015" />,
+    <App />,
     document.getElementById('react-container')
 );
