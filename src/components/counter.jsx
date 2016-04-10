@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from 'material-ui/lib/card/card';
-import CardText from 'material-ui/lib/card/card-text';
+import CardTitle from 'material-ui/lib/card/card-title';
 import CardActions from 'material-ui/lib/card/card-actions';
 import FlatButton from 'material-ui/lib/flat-button';
 
@@ -41,9 +41,7 @@ export default class Counter extends React.Component {
         }
         return (
             <Card style={counterStyle}>
-                <CardText>
-                    <h2>{this.state.value}</h2>
-                </CardText>
+                <CardTitle title={this.state.value} />
                 <CardActions>
                     <FlatButton
                         label="Increment"
