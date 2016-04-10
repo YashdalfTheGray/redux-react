@@ -75,6 +75,10 @@ gulp.task('watch', ['build'], function() {
     "use strict";
 
     gulp.watch('src/**/*.jsx', ['buildjsx']);
+    gulp.watch(
+        [ 'src/**/*.css', 'src/**/*.html'],
+        ['copyfiles']
+    );
 });
 
 gulp.task('copyfiles', function() {
@@ -92,7 +96,7 @@ gulp.task('buildjsx', function() {
 
     return browserify({
         entries: 'src/bootstrap.jsx',
-        extensions: ['.jsx'],
+        extensions: ['.jsx', '.js'],
         debug: true
     })
     .transform('babelify', { presets: ['es2015', 'react'] })
