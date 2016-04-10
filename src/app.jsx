@@ -45,7 +45,7 @@ class App extends React.Component {
         return (
             <div>
                 <AppBar
-                    title="Redux" />
+                    title="Redux Counters" />
                 <div style={counterListStyle}>
                     {counters}
                 </div>
