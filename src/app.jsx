@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 import AppBar from 'material-ui/lib/app-bar';
 
 import Counter from './components/counter';
-import counterReducer from './stores/counterReducer';
+import counterReducer from './reducers/counterReducer';
 
 class App extends React.Component {
 
