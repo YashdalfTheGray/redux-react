@@ -83,4 +83,5 @@ class App extends React.Component {
 export default App;
 
 const counterStore = createStore(counterReducer);
-export { counterStore };
+const todoStore = createStore(todoReducer);
+export { counterStore, todoStore };
