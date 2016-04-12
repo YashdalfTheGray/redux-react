@@ -2,6 +2,7 @@ import React from 'react';
 import RaisedButton from 'material-ui/lib/raised-button';
 
 import Counter from './counter';
+import styles from '../styles';
 import { counterStore } from '../app';
 
 export default class CounterList extends React.Component {
@@ -35,7 +36,7 @@ export default class CounterList extends React.Component {
     render() {
         return (
             <div>
-                <div style={{ marginTop: '16px' }}>
+                <div style={styles.cardList}>
                     {this.state.counters.map((c, i) => {
                         return <Counter key={i} index={i} />
                     })}

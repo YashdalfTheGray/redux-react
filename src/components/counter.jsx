@@ -5,6 +5,7 @@ import CardActions from 'material-ui/lib/card/card-actions';
 import FlatButton from 'material-ui/lib/flat-button';
 
 import { counterStore } from '../app';
+import styles from '../styles';
 
 export default class Counter extends React.Component {
 
@@ -48,12 +49,8 @@ export default class Counter extends React.Component {
     }
 
     render() {
-        var counterStyle = {
-            margin: '0px 16px',
-            marginBottom: '16px'
-        }
         return (
-            <Card style={counterStyle}>
+            <Card style={styles.card}>
                 <CardTitle title={this.state.value} />
                 <CardActions>
                     <FlatButton
