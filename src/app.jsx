@@ -1,59 +1,80 @@
 import React from 'react';
 import { createStore } from 'redux';
 import AppBar from 'material-ui/lib/app-bar';
-import RaisedButton from 'material-ui/lib/raised-button';
+import LeftNav from 'material-ui/lib/left-nav';
+import MenuItem from 'material-ui/lib/menus/menu-item';
 
-import Counter from './components/counter';
 import counterReducer from './reducers/counterReducer';
+import CounterList from './components/counter-list';
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            counters: counterStore.getState()
+        this.childViews = {
+            COUNTERS: 'Redux Counters',
+            TODOS: 'Redux Todos'
         };
 
-        this.unsubscribe = counterStore.subscribe(() => {
-            this.setState({
-                counters: counterStore.getState()
-            });
+        this.state = {
+            currentView: this.childViews.COUNTERS,
+            navMenuOpen: false
+        };
+
+        this.navMenuClick = this.navMenuClick.bind(this);
+        this.onRequestChange = this.onRequestChange.bind(this);
+    }
+
+    navMenuClick() {
+        this.setState({
+            navMenuOpen: true
         });
     }
 
-    componentDidMount() {
-        counterStore.dispatch({ type: '' });
+    onRequestChange(open) {
+        this.setState({ open });
     }
 
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-
-    addCounter() {
-        counterStore.dispatch({ type: 'ADD_COUNTER' });
+    switchView(state) {
+        this.setState({
+            currentView: state,
+            navMenuOpen: false
+        });
     }
 
     render() {
-        var counters = this.state.counters.map((c, i) => {
-            return <Counter key={i} index={i} />
-        });
-
-        var counterListStyle = {
-            marginTop: '16px'
+        var viewToDisplay;
+        if (this.state.currentView === this.childViews.COUNTERS) {
+            viewToDisplay = <CounterList />;
+        }
+        else if (this.state.currentView === this.childViews.TODOS) {
+            viewToDisplay = (
+                <div>
+                    <h2>Todos go here</h2>
+                </div>
+            );
         }
         return (
             <div>
                 <AppBar
-                    title="Redux Counters" />
-                <div style={counterListStyle}>
-                    {counters}
-                </div>
-                <RaisedButton
-                    style={{ margin: '0px 16px', marginTop: '24px' }}
-                    label="Add Counter"
-                    primary={true}
-                    onTouchTap={this.addCounter} />
+                    title={this.state.currentView}
+                    iconClassNameRight="muidocs-icon-navigation-expand-more"
+                    onLeftIconButtonTouchTap={this.navMenuClick} />
+                {viewToDisplay}
+                <LeftNav
+                    docked={false}
+                    open={this.state.navMenuOpen}
+                    onRequestChange={this.onRequestChange}>
+                    <MenuItem
+                        onTouchTap={this.switchView.bind(this, this.childViews.COUNTERS)}>
+                        Redux Counters
+                    </MenuItem>
+                    <MenuItem
+                        onTouchTap={this.switchView.bind(this, this.childViews.TODOS)}>
+                        Redux Todos
+                    </MenuItem>
+                </LeftNav>
             </div>
         );
     }
