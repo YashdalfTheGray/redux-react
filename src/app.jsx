@@ -5,7 +5,9 @@ import LeftNav from 'material-ui/lib/left-nav';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
 import counterReducer from './reducers/counterReducer';
+import todosReducer from './reducers/todosReducer';
 import CounterList from './components/counter-list';
+import TodoList from './components/todo-list';
 
 class App extends React.Component {
 
@@ -49,11 +51,7 @@ class App extends React.Component {
             viewToDisplay = <CounterList />;
         }
         else if (this.state.currentView === this.childViews.TODOS) {
-            viewToDisplay = (
-                <div>
-                    <h2>Todos go here</h2>
-                </div>
-            );
+            viewToDisplay = <TodoList />;
         }
         return (
             <div>
@@ -83,5 +81,5 @@ class App extends React.Component {
 export default App;
 
 const counterStore = createStore(counterReducer);
-const todoStore = createStore(todoReducer);
+const todoStore = createStore(todosReducer);
 export { counterStore, todoStore };
