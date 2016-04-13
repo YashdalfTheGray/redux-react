@@ -99,7 +99,7 @@ gulp.task('buildjsx', function() {
         extensions: ['.jsx', '.js'],
         debug: true
     })
-    .transform('babelify', { presets: ['es2015', 'react'] })
+    .transform('babelify', { presets: ['es2015', 'react', 'stage-0'] })
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('dist'));
