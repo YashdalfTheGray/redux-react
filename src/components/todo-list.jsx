@@ -94,7 +94,6 @@ export default class TodoList extends React.Component {
         var emptyTodoList = <p>There are no todos yet; add one above.</p>;
 
         var todos = this.state.todos.map(todo => {
-            console.log(todo.id);
             if (todo.completed) {
                 return (
                     <ListItem
