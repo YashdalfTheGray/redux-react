@@ -5,5 +5,16 @@ export default {
     },
     cardList: {
         marginTop: '16px'
+    },
+    flexRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    flexItem: {
+        flex: '1 1 auto'
+    },
+    spaceLg: {
+        margin: '20px'
     }
 }
