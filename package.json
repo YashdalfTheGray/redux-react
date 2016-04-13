@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/YashdalfTheGray/react-es6-md-starter#readme",
   "dependencies": {
+    "babel-preset-stage-0": "^6.5.0",
     "chalk": "^1.1.1",
     "express": "^4.13.4",
     "lodash": "^4.10.0",
