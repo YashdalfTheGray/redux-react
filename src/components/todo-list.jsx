@@ -3,6 +3,8 @@ import React from 'react';
 import Card from 'material-ui/lib/card/card';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
+import CardActions from 'material-ui/lib/card/card-actions';
+import FlatButton from 'material-ui/lib/flat-button';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Divider from 'material-ui/lib/divider';
@@ -62,6 +64,12 @@ export default class TodoList extends React.Component {
         todoStore.dispatch({
             type: 'TOGGLE_TODO',
             id: id
+        });
+    }
+
+    clearCompleted() {
+        todoStore.dispatch({
+            type: 'REMOVE_COMPLETED_TODOS'
         });
     }
 
@@ -139,6 +147,11 @@ export default class TodoList extends React.Component {
                         {this.state.todos.length > 0 ? todos : emptyTodoList}
                     </List>
                 </CardText>
+                <CardActions>
+                    <FlatButton
+                        label="Clear Completed"
+                        onTouchTap={this.clearCompleted} />
+                </CardActions>
             </Card>
         );
     }
