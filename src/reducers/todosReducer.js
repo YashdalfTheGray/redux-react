@@ -10,9 +10,9 @@ const todosReducer = (state = [], action) => {
                 }
             ];
             break;
-        case 'REMOVE_TODO':
+        case 'REMOVE_COMPLETED_TODOS':
             return state.filter(todo => {
-                if (todo.id !== action.id) {
+                if (!todo.completed) {
                     return todo;
                 }
             });
