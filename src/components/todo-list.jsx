@@ -60,7 +60,7 @@ export default class TodoList extends React.Component {
         });
     }
 
-    markTodoCompleted(id) {
+    toggleTodo(id) {
         todoStore.dispatch({
             type: 'TOGGLE_TODO',
             id: id
@@ -108,7 +108,8 @@ export default class TodoList extends React.Component {
                         style={completedTodoStyle}
                         key={todo.id}
                         primaryText={todo.text}
-                        rightIcon={<CheckIcon style={iconStyle} />} />
+                        rightIcon={<CheckIcon style={iconStyle} />}
+                        onTouchTap={this.toggleTodo.bind(this, todo.id)}/>
                 );
             }
             else {
@@ -116,7 +117,7 @@ export default class TodoList extends React.Component {
                     <ListItem
                         key={todo.id}
                         primaryText={todo.text}
-                        onTouchTap={this.markTodoCompleted.bind(this, todo.id)}/>
+                        onTouchTap={this.toggleTodo.bind(this, todo.id)}/>
                 );
             }
         });
