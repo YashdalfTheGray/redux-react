@@ -20,7 +20,7 @@ class App extends React.Component {
         };
 
         this.state = {
-            currentView: this.childViews.COUNTERS,
+            currentView: this.childViews.TODOS,
             navMenuOpen: false
         };
 
