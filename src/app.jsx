@@ -5,7 +5,7 @@ import LeftNav from 'material-ui/lib/left-nav';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
 import counterReducer from './reducers/counterReducer';
-import todosReducer from './reducers/todosReducer';
+import todoApp from './reducers/todosReducer';
 import CounterList from './components/counter-list';
 import TodoList from './components/todo-list';
 
@@ -81,5 +81,5 @@ class App extends React.Component {
 export default App;
 
 const counterStore = createStore(counterReducer);
-const todoStore = createStore(todosReducer);
+const todoStore = createStore(todoApp);
 export { counterStore, todoStore };

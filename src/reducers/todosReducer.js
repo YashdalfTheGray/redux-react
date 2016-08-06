@@ -1,3 +1,13 @@
+const visibilityFilter = (state = 'SHOW_ALL', action) => {
+    switch (action.type) {
+        case 'SET_VISIBILITY_FILTER':
+            return action.filter;
+            break;
+        default:
+            return state;
+    }
+}
+
 const todo = (state, action) => {
     switch (action.type) {
         case 'ADD_TODO':
@@ -21,22 +31,15 @@ const todo = (state, action) => {
         default:
             return state;
     }
-}
+};
 
-const todosReducer = (state = [], action) => {
+const todos = (state = [], action) => {
     switch (action.type) {
         case 'ADD_TODO':
             return [
                 ...state,
                 todo(undefined, action)
             ];
-            break;
-        case 'REMOVE_COMPLETED_TODOS':
-            return state.filter(todo => {
-                if (!todo.completed) {
-                    return todo;
-                }
-            });
             break;
         case 'TOGGLE_TODO':
             return state.map(t => todo(t, action));
@@ -46,4 +49,11 @@ const todosReducer = (state = [], action) => {
     }
 };
 
-export default todosReducer;
+const todoApp = (state = {}, action) => {
+    return {
+        todos: todos(state.todos, action),
+        visibilityFilter: visibilityFilter(state.visibilityFilter, action)
+    };
+}
+
+export default todoApp;
