@@ -26,13 +26,17 @@ export default class TodoList extends React.Component {
         this.state = {
             validateSnackbarOpen: false,
             newTodo: '',
-            todos: todoStore.getState()
+            todos: todoStore.getState().todos,
+            visibilityFilter: todoStore.getState().visibilityFilter
         };
 
         this.unsubscribe = todoStore.subscribe(() => {
             this.setState({
-                todos: todoStore.getState()
-            });
+                todos: todoStore.getState().todos,
+                visibilityFilter: todoStore.getState().visibilityFilter
+            }/*, () => {
+                console.log(this.state);
+            }*/);
         });
 
         this.handleChange = this.handleChange.bind(this);
@@ -67,9 +71,17 @@ export default class TodoList extends React.Component {
         });
     }
 
-    clearCompleted() {
+    hideCompleted() {
         todoStore.dispatch({
-            type: 'REMOVE_COMPLETED_TODOS'
+            type: 'SET_VISIBILITY_FILTER',
+            filter: 'HIDE_COMPLETED'
+        });
+    }
+
+    showAll() {
+        todoStore.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter: 'SHOW_ALL'
         });
     }
 
@@ -92,16 +104,18 @@ export default class TodoList extends React.Component {
     }
 
     render() {
-        var iconStyle = {
+        const iconStyle = {
             fill: Colors.green500
         };
-        var completedTodoStyle = {
+        const completedTodoStyle = {
             textDecoration: 'line-through'
         };
 
-        var emptyTodoList = <p>There are no todos yet; add one above.</p>;
+        const emptyTodoList = <p>There are no todos yet; add one above.</p>;
 
-        var todos = this.state.todos.map(todo => {
+        let todos = this.state.visibilityFilter === 'SHOW_ALL' ? this.state.todos : this.state.todos.filter(t => !t.completed);
+
+        todos = todos.map(todo => {
             if (todo.completed) {
                 return (
                     <ListItem
@@ -145,13 +159,16 @@ export default class TodoList extends React.Component {
                             onRequestClose={this.handleValidateRequestClose} />
                     </div>
                     <List style={styles.spacerLg}>
-                        {this.state.todos.length > 0 ? todos : emptyTodoList}
+                        {todos.length > 0 ? todos : emptyTodoList}
                     </List>
                 </CardText>
                 <CardActions>
                     <FlatButton
-                        label="Clear Completed"
-                        onTouchTap={this.clearCompleted} />
+                        label="Show all"
+                        onTouchTap={this.showAll} />
+                    <FlatButton
+                        label="Hide Completed"
+                        onTouchTap={this.hideCompleted} />
                 </CardActions>
             </Card>
         );
