@@ -1,13 +1,18 @@
 import React from 'react';
 import { createStore } from 'redux';
-import AppBar from 'material-ui/lib/app-bar';
-import LeftNav from 'material-ui/lib/left-nav';
-import MenuItem from 'material-ui/lib/menus/menu-item';
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import counterReducer from './reducers/counterReducer';
 import todoApp from './reducers/todosReducer';
 import CounterList from './components/counter-list';
 import TodoList from './components/todo-list';
+
+const lightMuiTheme = getMuiTheme(lightBaseTheme);
 
 class App extends React.Component {
 
@@ -54,26 +59,28 @@ class App extends React.Component {
             viewToDisplay = <TodoList />;
         }
         return (
-            <div>
-                <AppBar
-                    title={this.state.currentView}
-                    iconClassNameRight="muidocs-icon-navigation-expand-more"
-                    onLeftIconButtonTouchTap={this.navMenuClick} />
-                {viewToDisplay}
-                <LeftNav
-                    docked={false}
-                    open={this.state.navMenuOpen}
-                    onRequestChange={this.onRequestChange}>
-                    <MenuItem
-                        onTouchTap={this.switchView.bind(this, this.childViews.COUNTERS)}>
-                        Redux Counters
-                    </MenuItem>
-                    <MenuItem
-                        onTouchTap={this.switchView.bind(this, this.childViews.TODOS)}>
-                        Redux Todos
-                    </MenuItem>
-                </LeftNav>
-            </div>
+            <MuiThemeProvider muiTheme={lightMuiTheme}>
+                <div>
+                    <AppBar
+                        title={this.state.currentView}
+                        iconClassNameRight="muidocs-icon-navigation-expand-more"
+                        onLeftIconButtonTouchTap={this.navMenuClick} />
+                    {viewToDisplay}
+                    <Drawer
+                        docked={false}
+                        open={this.state.navMenuOpen}
+                        onRequestChange={this.onRequestChange}>
+                        <MenuItem
+                            onTouchTap={this.switchView.bind(this, this.childViews.COUNTERS)}>
+                            Redux Counters
+                        </MenuItem>
+                        <MenuItem
+                            onTouchTap={this.switchView.bind(this, this.childViews.TODOS)}>
+                            Redux Todos
+                        </MenuItem>
+                    </Drawer>
+                </div>
+            </MuiThemeProvider>
         );
     }
 }

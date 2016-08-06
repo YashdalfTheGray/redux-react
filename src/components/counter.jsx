@@ -1,8 +1,6 @@
 import React from 'react';
-import Card from 'material-ui/lib/card/card';
-import CardTitle from 'material-ui/lib/card/card-title';
-import CardActions from 'material-ui/lib/card/card-actions';
-import FlatButton from 'material-ui/lib/flat-button';
+import {Card, CardTitle, CardActions} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 import { counterStore } from '../app';
 import styles from '../styles';
