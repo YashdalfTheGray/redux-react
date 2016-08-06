@@ -86,7 +86,8 @@ gulp.task('copyfiles', function() {
 
     gulp.src([
         'src/**/*',
-        '!src/**/*.jsx'
+        '!src/**/*.jsx',
+        '!src/**/*.js'
     ])
     .pipe(gulp.dest('dist'));
 });
