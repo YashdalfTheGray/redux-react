@@ -74,9 +74,9 @@ gulp.task('build', ['copyfiles', 'buildjsx']);
 gulp.task('watch', ['build'], function() {
     "use strict";
 
-    gulp.watch('src/**/*.jsx', ['buildjsx']);
+    gulp.watch(['src/**/*.js', 'src/**/*.jsx'], ['buildjsx']);
     gulp.watch(
-        ['src/**/*.js', 'src/**/*.css', 'src/**/*.html'],
+        ['src/**/*.css', 'src/**/*.html'],
         ['copyfiles']
     );
 });
