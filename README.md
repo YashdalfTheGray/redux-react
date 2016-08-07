@@ -1,7 +1,7 @@
 # redux-react
 Egghead course on Redux
 
-Current location: Reducer composition with `combineReducers()`
+Current location: implementing `combineReducers()` from scratch
 
 ## Installing
 
