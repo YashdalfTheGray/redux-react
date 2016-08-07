@@ -36,6 +36,7 @@ export default class TodoList extends React.Component {
         });
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleValidateRequestClose = this.handleValidateRequestClose.bind(this);
         this.submitAnswer = this.submitAnswer.bind(this);
     }
@@ -58,6 +59,12 @@ export default class TodoList extends React.Component {
         this.setState({
             newTodo: event.target.value
         });
+    }
+
+    handleKeyDown(event) {
+        if (event.key === 'Enter') {
+            this.submitAnswer();
+        }
     }
 
     toggleTodo(id) {
@@ -142,7 +149,8 @@ export default class TodoList extends React.Component {
                             style={styles.flexItem}
                             floatingLabelText="Todo"
                             value={this.state.newTodo}
-                            onChange={this.handleChange} />
+                            onChange={this.handleChange}
+                            onKeyDown={this.handleKeyDown}/>
                         <IconButton
                             tooltip="Submit"
                             onTouchTap={this.submitAnswer}>
