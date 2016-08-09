@@ -1,5 +1,15 @@
 import { combineReducers } from 'redux';
 
+const combineReducers1 = (reducers) => {
+    return (state = {}, action) => {
+        return Object.keys(reducers).reduce((nextState, key) => {
+            nextState[key] = reducers[key](state[key], action);
+            return nextState;
+        }, {});
+    };
+};
+
+
 const visibilityFilter = (state = 'SHOW_ALL', action) => {
     switch (action.type) {
         case 'SET_VISIBILITY_FILTER':
@@ -51,7 +61,7 @@ const todos = (state = [], action) => {
     }
 };
 
-const todoApp = combineReducers({
+const todoApp = combineReducers1({
     todos,
     visibilityFilter
 });
