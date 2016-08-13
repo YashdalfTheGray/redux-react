@@ -3,6 +3,7 @@ import { createStore } from 'redux';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -26,11 +27,22 @@ class App extends React.Component {
 
         this.state = {
             currentView: this.childViews.TODOS,
-            navMenuOpen: false
+            navMenuOpen: false,
+            counters: counterStore.getState()
         };
+
+        this.unsubscribeCounters = counterStore.subscribe(() => {
+            this.setState({
+                counters: counterStore.getState()
+            });
+        });
 
         this.navMenuClick = this.navMenuClick.bind(this);
         this.onRequestChange = this.onRequestChange.bind(this);
+    }
+
+    componentWillUnmount() {
+        this.unsubscribeCounters();
     }
 
     navMenuClick() {
@@ -50,10 +62,23 @@ class App extends React.Component {
         });
     }
 
+    addCounter() {
+        counterStore.dispatch({ type: 'ADD_COUNTER' });
+    }
+
     render() {
         var viewToDisplay;
         if (this.state.currentView === this.childViews.COUNTERS) {
-            viewToDisplay = <CounterList />;
+            viewToDisplay = (
+                <div>
+                    <CounterList counters={this.state.counters} />
+                    <RaisedButton
+                        style={{ margin: '0px 16px', marginTop: '24px' }}
+                        label="Add Counter"
+                        secondary={true}
+                        onTouchTap={this.addCounter}/>
+                </div>
+            );
         }
         else if (this.state.currentView === this.childViews.TODOS) {
             viewToDisplay = <TodoList />;
