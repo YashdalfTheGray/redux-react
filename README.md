@@ -1,7 +1,7 @@
 # redux-react
 Egghead course on Redux
 
-Current location: implementing `combineReducers()` from scratch
+Current location: Redux: React Todo List Example (Adding a Todo)
 
 ## Installing
 
@@ -15,4 +15,4 @@ For development, `gulp watch` and `gulp serve` might be more preferable since ch
 
 ## Cleaning
 
-The `dist` folder contains all the built sources for the app. It can be cleaned using `gulp clean:dist`. `gulp clean:modules` will clean up the `node_modules` folder. After a `gulp clean:modules`, an `npm install` is going to be needed before any other commands are run. 
+The `dist` folder contains all the built sources for the app. It can be cleaned using `gulp clean:dist`. `gulp clean:modules` will clean up the `node_modules` folder. After a `gulp clean:modules`, an `npm install` is going to be needed before any other commands are run.
