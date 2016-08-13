@@ -1,4 +1,20 @@
-const counterReducer = (state = [], action) => {
+const counter = (state = 0, action) => {
+    switch (action.type) {
+        case 'INCREMENT':
+            return state + 1;
+            break;
+        case 'DECREMENT':
+            return state - 1;
+            break;
+        case 'RESET':
+            return 0;
+            break;
+        default:
+            return state;
+    }
+}
+
+const counters = (state = [], action) => {
     switch (action.type) {
         case 'ADD_COUNTER':
             return [...state, 0];
@@ -12,21 +28,21 @@ const counterReducer = (state = [], action) => {
         case 'INCREMENT':
             return [
                 ...state.slice(0, action.index),
-                state[action.index] + 1,
+                counter(state[action.index], action),
                 ...state.slice(action.index + 1)
             ];
             break;
         case 'DECREMENT':
             return [
                 ...state.slice(0, action.index),
-                state[action.index] - 1,
+                counter(state[action.index], action),
                 ...state.slice(action.index + 1)
             ];
             break;
         case 'RESET':
             return [
                 ...state.slice(0, action.index),
-                0,
+                counter(state[action.index], action),
                 ...state.slice(action.index + 1)
             ];
             break;
@@ -35,4 +51,4 @@ const counterReducer = (state = [], action) => {
     }
 };
 
-export default counterReducer;
+export default counters;
