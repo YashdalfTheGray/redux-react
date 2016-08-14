@@ -7,62 +7,39 @@ import styles from '../styles';
 
 export default class Counter extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            value: counterStore.getState()[this.props.index]
-        };
-
-        this.unsubscribe = counterStore.subscribe(() => {
-            this.setState({
-                value: counterStore.getState()[this.props.index]
-            });
-        });
-
-        this.incrementCounter = this.incrementCounter.bind(this);
-        this.decrementCounter = this.decrementCounter.bind(this);
-        this.resetCounter = this.resetCounter.bind(this);
-        this.removeCounter = this.removeCounter.bind(this);
+    incrementCounter(index) {
+        counterStore.dispatch({ type: 'INCREMENT', index: index });
     }
 
-    componentWillUnmount() {
-        this.unsubscribe();
+    decrementCounter(index) {
+        counterStore.dispatch({ type: 'DECREMENT', index: index });
     }
 
-    incrementCounter() {
-        counterStore.dispatch({ type: 'INCREMENT', index: this.props.index });
+    resetCounter(index) {
+        counterStore.dispatch({ type: 'RESET', index: index });
     }
 
-    decrementCounter() {
-        counterStore.dispatch({ type: 'DECREMENT', index: this.props.index });
-    }
-
-    resetCounter() {
-        counterStore.dispatch({ type: 'RESET', index: this.props.index });
-    }
-
-    removeCounter() {
-        counterStore.dispatch({ type: 'REMOVE_COUNTER', index: this.props.index });
+    removeCounter(index) {
+        counterStore.dispatch({ type: 'REMOVE_COUNTER', index: index });
     }
 
     render() {
         return (
             <Card style={styles.card}>
-                <CardTitle title={this.state.value} />
+                <CardTitle title={this.props.value} />
                 <CardActions>
                     <FlatButton
                         label="Increment"
-                        onTouchTap={this.incrementCounter} />
+                        onTouchTap={this.incrementCounter.bind(this, this.props.index)} />
                     <FlatButton
                         label="Decrement"
-                        onTouchTap={this.decrementCounter} />
+                        onTouchTap={this.decrementCounter.bind(this, this.props.index)} />
                     <FlatButton
                         label="Reset"
-                        onTouchTap={this.resetCounter} />
+                        onTouchTap={this.resetCounter.bind(this, this.props.index)} />
                     <FlatButton
                         label="Remove Counter"
-                        onTouchTap={this.removeCounter} />
+                        onTouchTap={this.removeCounter.bind(this, this.props.index)} />
                 </CardActions>
             </Card>
         );

@@ -9,7 +9,7 @@ export default class CounterList extends React.Component {
         return (
             <div style={styles.cardList}>
                 {this.props.counters.map((c, i) => {
-                    return <Counter key={i} index={i} />
+                    return <Counter key={i} index={i} value={c} />
                 })}
             </div>
         );
