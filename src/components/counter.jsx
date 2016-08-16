@@ -8,19 +8,19 @@ import styles from '../styles';
 export default class Counter extends React.Component {
 
     incrementCounter(index) {
-        counterStore.dispatch({ type: 'INCREMENT', index: index });
+        counterStore.dispatch({ type: 'INCREMENT', index: this.props.index });
     }
 
     decrementCounter(index) {
-        counterStore.dispatch({ type: 'DECREMENT', index: index });
+        counterStore.dispatch({ type: 'DECREMENT', index: this.props.index });
     }
 
     resetCounter(index) {
-        counterStore.dispatch({ type: 'RESET', index: index });
+        counterStore.dispatch({ type: 'RESET', index: this.props.index });
     }
 
     removeCounter(index) {
-        counterStore.dispatch({ type: 'REMOVE_COUNTER', index: index });
+        counterStore.dispatch({ type: 'REMOVE_COUNTER', index: this.props.index });
     }
 
     render() {
@@ -30,16 +30,16 @@ export default class Counter extends React.Component {
                 <CardActions>
                     <FlatButton
                         label="Increment"
-                        onTouchTap={this.incrementCounter.bind(this, this.props.index)} />
+                        onTouchTap={this.incrementCounter.bind(this)} />
                     <FlatButton
                         label="Decrement"
-                        onTouchTap={this.decrementCounter.bind(this, this.props.index)} />
+                        onTouchTap={this.decrementCounter.bind(this)} />
                     <FlatButton
                         label="Reset"
-                        onTouchTap={this.resetCounter.bind(this, this.props.index)} />
+                        onTouchTap={this.resetCounter.bind(this)} />
                     <FlatButton
                         label="Remove Counter"
-                        onTouchTap={this.removeCounter.bind(this, this.props.index)} />
+                        onTouchTap={this.removeCounter.bind(this)} />
                 </CardActions>
             </Card>
         );
