@@ -156,11 +156,6 @@ export default class TodoList extends React.Component {
                             onTouchTap={this.submitAnswer}>
                             <SubmitIcon />
                         </IconButton>
-                        <Snackbar
-                            open={this.state.validateSnackbarOpen}
-                            message="Cannot add empty todo."
-                            autoHideDuration={3000}
-                            onRequestClose={this.handleValidateRequestClose} />
                     </div>
                     <List style={styles.spacerLg}>
                         {todos.length > 0 ? todos : emptyTodoList}
@@ -174,6 +169,11 @@ export default class TodoList extends React.Component {
                         label="Hide Completed"
                         onTouchTap={this.hideCompleted} />
                 </CardActions>
+                <Snackbar
+                    open={this.state.validateSnackbarOpen}
+                    message="Cannot add empty todo."
+                    autoHideDuration={3000}
+                    onRequestClose={this.handleValidateRequestClose} />
             </Card>
         );
     }
